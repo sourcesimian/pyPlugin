@@ -110,20 +110,16 @@ class PluginLoader(object):
         folder, name = os.path.split(file)
         name = os.path.splitext(name)[0]
 
-        try:
-            sys.path.insert(0, folder)
+        import imp
+        module = imp.load_source(name, file)
 
-            module = __import__(name, level=0)
+        def filter_classes(m):
+            if inspect.isclass(m):
+                if inspect.getmro(m)[1] == self.__base_class:
+                    return True
+            return False
 
-            def filter_classes(m):
-                if inspect.isclass(m):
-                    if inspect.getmro(m)[1] == self.__base_class:
-                        return True
-                return False
-
-            for name, obj in inspect.getmembers(module, filter_classes):
-                child_classes.append(obj)
-        finally:
-            sys.path.pop(0)
+        for name, obj in inspect.getmembers(module, filter_classes):
+            child_classes.append(obj)
 
         return child_classes

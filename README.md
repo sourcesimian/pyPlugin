@@ -10,7 +10,7 @@ one or more files which you specified. The rest is up to you.
 
 ## Installation
 
-    pip install https://github.com/sourcesimian/pyPlugin/tarball/v0.1#egg=pyplugin-0.1
+    pip install https://github.com/sourcesimian/pyPlugin/tarball/v0.1.1#egg=pyplugin-0.1.1
 
 ## Usage
 
@@ -62,8 +62,8 @@ You can easily add pyPlugin as an install dependency of your own project, e.g.:
     setup(
        name="myUtil",
        ...
-       install_requires=[..., 'pyplugin==0.1'],
-       dependency_links = ['https://github.com/sourcesimian/pyPlugin/tarball/v0.1#egg=pyplugin-0.1',]
+       install_requires=[..., 'pyplugin==0.1.1'],
+       dependency_links = ['https://github.com/sourcesimian/pyPlugin/tarball/v0.1.1#egg=pyplugin-0.1.1',]
     )
 
 This will allow your package to be instaled using:

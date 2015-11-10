@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pyplugin",
-    version="0.1",
+    version="0.1.1",
     description="Simple framework-less plugin loader for Python",
     author="Source Simian",
     url='https://github.com/sourcesimian/pyPlugin',
