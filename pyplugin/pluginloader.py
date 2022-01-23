@@ -1,10 +1,12 @@
 import glob
+import importlib
 import inspect
+import itertools
 import sys
 import os
 
 
-class PluginLoader(object):
+class PluginLoader:
     """
     Simple framework-less plugin loader for Python
 
@@ -67,8 +69,7 @@ class PluginLoader(object):
         self.__base_class = base_class
         self.__import_modules = import_modules
 
-        from itertools import chain
-        files = list(chain(*[glob.glob(f) for f in filespecs]))
+        files = list(itertools.chain(*[glob.glob(f) for f in filespecs]))
 
         self.__plugins = self.__load_child_classes(files)
 
@@ -107,11 +108,12 @@ class PluginLoader(object):
         """
 
         child_classes = []
-        folder, name = os.path.split(file)
+        _folder, name = os.path.split(file)
         name = os.path.splitext(name)[0]
 
-        import imp
-        module = imp.load_source(name, file)
+        spec = importlib.util.spec_from_file_location(name, file)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
 
         def filter_classes(m):
             if inspect.isclass(m):
