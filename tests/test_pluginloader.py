@@ -1,5 +1,3 @@
-from unittest import TestCase
-
 import os
 
 
@@ -8,10 +6,10 @@ class ParserBaseVirtual(object):
         pass
 
 
-class TestPluginLoader(TestCase):
+class TestPluginLoader:
     def test_static_module(self):
         from pyplugin import PluginLoader
-        from base import Parser1
+        from tests.base import Parser1
 
         plugin_dir = os.path.dirname(__file__)
 
@@ -19,10 +17,10 @@ class TestPluginLoader(TestCase):
         plugins = PluginLoader(Parser1, path)
 
         parsers = [cls() for cls in plugins]
-        self.assertEqual(1, len(parsers))
+        assert 1 == len(parsers)
 
         for p in parsers:
-            self.assertEqual('bar', p.visit('tea?'))
+            assert 'bar' == p.visit('tea?')
 
     def test_virtual_module(self):
         from pyplugin import PluginLoader
@@ -37,14 +35,14 @@ class TestPluginLoader(TestCase):
         plugins = PluginLoader(ParserBaseVirtual, path, vmodule)
 
         parsers = [cls() for cls in plugins]
-        self.assertEqual(1, len(parsers))
+        assert 1 == len(parsers)
 
         for p in parsers:
             p.handle('door?')
 
     def test_common_name(self):
         from pyplugin import PluginLoader
-        from base import Parser1
+        from tests.base import Parser1
 
         plugin_dir = os.path.dirname(__file__)
 
@@ -52,7 +50,7 @@ class TestPluginLoader(TestCase):
         plugins = PluginLoader(Parser1, path)
 
         parsers = [cls() for cls in plugins]
-        self.assertEqual(1, len(parsers))
+        assert 1 == len(parsers)
 
         for p in parsers:
-            self.assertEqual('tock', p.tick())
+            assert 'tock' == p.tick()

@@ -1,5 +1,5 @@
 test:
-	trial tests/test_*.py
+	pytest ./tests/test_*.py -vvv --junitxml=./reports/unittest-results.xml
 
 
 coverage:
