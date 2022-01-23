@@ -59,6 +59,4 @@ for p in parsers:
 ```
 
 # Contribution
-Yes sure! And please. I built **mqtt-gpio** because I couldn't find an solution to with the same capabilities. I want it to be a project that is quick and easy to get up and running, and helps open up MQTT to anyone.
-
-Before pushing a PR please ensure that `make check` and `make test` are clean and please consider adding unit tests.
+Yes sure! And please. Before pushing a PR please ensure that `make check` and `make test` are clean and please consider adding unit tests.
